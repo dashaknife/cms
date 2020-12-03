@@ -7,9 +7,10 @@
 
             <div class="jumbotron">
                 <h3 class="display-4">{{$page->title}}</h3>
-                <p class="lead">{{$page->main_content}}</p>
+                <p class="lead"><?php use App\Models\Parse;
+                echo Parse::parse ($page->main_content ?? "")?></p>
                 <hr class="my-4">
-                 <h3 class="lead">Author: {{$page->author}}</h3>
+                <h3 class="lead">Author: {{$page->author}}</h3>
                 <p>Created at: {{$page->created_at}}
                 Updated at: {{$page->updated_at}}</p>
             </div>
