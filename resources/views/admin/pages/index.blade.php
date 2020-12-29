@@ -7,7 +7,6 @@
         <div class="col-md-10">
             <a href="{{ route('admin.pages.create')}}">
                 <button type="button" class="btn btn-success btn-lg">Add new page
-
                 </button>
                 <a href="{{url('admin/pages/defl')}}" style="margin-left:49%"><button type="submit" class="btn btn-outline-dark">                         Default </button></a>
                     <a href="{{url('admin/pages/sorted')}}"><button type="submit" class="btn btn-outline-dark">                         Sorted </button></a>
@@ -17,8 +16,6 @@
             <div class="card">
                 <div class="card-header">{{ __('Pages') }}</div>
                 <div class="card-body">
-
-
                                <?php
                             $query = mysqli_query($connect, "SELECT * FROM pages ORDER BY id");
                             if(str_contains(url()->current(), "sorted")){
@@ -42,8 +39,15 @@
                         <h6 class="card-subtitle mb-2 text-muted">Author: {{$page->author}}</h6>
                         <p class="card-text">{{$page->main_content}}</p>
                         <hr>
-                        <p class="card-subtitle mb-2 text-muted">Cteated at: {{$page->created_at}}</p>
+                        <p class="card-subtitle mb-2 text-muted">Created at: {{$page->created_at}}</p>
                         <p class="card-subtitle mb-2 text-muted">Updated at: {{$page->updated_at}}</p>
+                        <div class="card-body" style="height: 5rem;">
+                        @if($page->key_teg == "author")
+                        <a href="{{url("admin/pages/search/$page->value_teg")}}"><button type="button" class="btn btn-warning float-left">#{{$page->value_teg}}</button></a>
+                        @elseif($page->key_teg == "category")
+                        <a href="{{url("admin/pages/search/$page->value_teg")}}"><button type="button" class="btn btn-info">#{{$page->value_teg}}</button></a>
+                        @endif
+                        </div>
                         @can('edit-pages')
                                         <a href="{{ route('admin.pages.edit', $page->id) }}"><button type="button" class="btn btn-warning float-left">
                                             Edit page

@@ -36,7 +36,6 @@
                       <div class="card-body">
                         <h5 class="card-title">{{$people->title}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Author: {{$people->author}}</h6>
-                        <p class="card-text">{{$people->main_content}}</p>
                         <hr>
                         <p class="card-subtitle mb-2 text-muted">Cteated at: {{$people->created_at}}</p>
                         <p class="card-subtitle mb-2 text-muted">Updated at: {{$people->updated_at}}</p>

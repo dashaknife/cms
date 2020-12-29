@@ -13,6 +13,12 @@
                 <h3 class="lead">Author: {{$page->author}}</h3>
                 <p>Created at: {{$page->created_at}}
                 Updated at: {{$page->updated_at}}</p>
+                
+                @if($page->key_teg == "author")
+                    <p><a href="{{url("admin/pages/search/$page->value_teg")}}"><button type="button" class="btn btn-warning float-left">#{{$page->value_teg}}</button></a></p>
+                @elseif($page->key_teg == "category")
+                    <p><a href="{{url("admin/pages/search/$page->value_teg")}}"><button type="button" class="btn btn-info">#{{$page->value_teg}}</button></a></p>
+                @endif
             </div>
         </div>
     </div>

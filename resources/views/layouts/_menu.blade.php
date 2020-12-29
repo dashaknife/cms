@@ -1,12 +1,9 @@
 @if(str_contains(url()->current(), "home"))
-   @foreach($categories as $category)
+  @foreach($categories as $category)
     @if ($category->children->count())
-        <li class="nav-item dropdown" style="margin-left:65px">
-        <div>
-          {{$category->title ?? ''}}
-        </div>
-
-        <div>
+      <li class="nav-item dropdown" style="margin-left:65px">
+      <div>{{$category->title ?? ''}}</div>
+      <div>
             @isset($category->children)
              @include('layouts._menu', [
              'categories' => $category->children,
@@ -18,7 +15,6 @@
           @isset($is_child)
 
               <a class="nav-link dropdown-item" style="margin-left:5px" href="{{ url("category/categor/$category->id") }}">-{{$category->title ?? ''}}</a>
-
               @foreach($pages as $people)
                 @if($people->categorry_id == $category->id)
                     <a class="nav-link dropdown-item" style="margin-left:32px" href="{{ url("$people->path") }}">{{$people->title}}</a>

@@ -11,8 +11,7 @@
                         @csrf
                        @include('admin.pages._form')
                     </form>
-
-                                </div>
+                </div>
         </div>
     </div>
 </div>
