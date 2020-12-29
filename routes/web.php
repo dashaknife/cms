@@ -47,7 +47,9 @@ Route::get('admin/pages/created', function () {
 Route::get('admin/pages/updated', function () {
     return view('admin.pages.index');
 });
-
+Route::get('admin/pages/search/{value_teg}', function ($value_teg) {
+    return View::make('search')->with('value', $value_teg);
+});
 
 
 Auth::routes();
