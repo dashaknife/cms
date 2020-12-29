@@ -24,17 +24,11 @@ class Parse  {
 			$name_of_command = substr($parts[$i], 0, $start); 
 			$params = explode(',', $params_text);
 
-			switch (self::check_command($name_of_command)) {
-				case 0:
-				  $parts[$i] = $macro->command_img($params[0],$params[1]);
-				  break;
-				case 1:
-				  $parts[$i] = $macro->command_page_link($params[0],$params[1],$params[2]);
-				  break;
-				case 2:
-				  $parts[$i] = $macro->command_page_tiles($params[0],$params[1]);
-				  break;  
-			  }		
+			if (self::check_command($name_of_command)) {
+				$parts[$i] = call_user_func_array([$macro, $name_of_command], $params); 
+			} else {   			
+				$parts[$i] = '~~' .  $name_of_command . '~~';
+			}    
 		}
 		$parsed_text = implode($parts);
 		return $parsed_text;

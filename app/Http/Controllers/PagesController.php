@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Category;
+use App\Models\Parse;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -35,6 +36,15 @@ class PagesController extends Controller
 
         return redirect()->route('admin.pages.index');
     }
+
+    public function edit(Page $page)
+    {
+        return view('admin.pages.edit', [
+            'page' => $page,
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'delimiter' => ''
+        ]);
+    }
     public function show(Request $request)
     {
         $url = $request->path();
@@ -54,16 +64,6 @@ class PagesController extends Controller
         return view('sorry', ['pages' => $pages]);
     }
 
-
-    public function edit(Page $page)
-    {
-        return view('admin.pages.edit', [
-            'page' => $page,
-            'categories' => Category::with('children')->where('parent_id', 0)->get(),
-            'delimiter' => ''
-        ]);
-    }
-
     public function update(Request $request, Page $page)
     {
 
@@ -80,7 +80,6 @@ class PagesController extends Controller
     public function destroy(Page $page)
     {
         $page->delete();
-
         return redirect()->route('admin.pages.index');
     }
 }
